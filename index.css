@@ -39,6 +39,7 @@
   box-sizing: border-box;
   outline: none;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .progress-api-progressValue::-webkit-outer-spin-button,
@@ -97,7 +98,7 @@
   cursor: pointer;
   content: "";
   height: 80%;
-  width: 33%;
+  width: var(--toggle-size);
   left: 10%;
   bottom: 10%;
   background-color: #ffffff;
