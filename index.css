@@ -1,0 +1,117 @@
+:root {
+  --color-progress: #ff8989;
+  --color-track: #fee8e8;
+  --toggle-size: 33%;
+}
+
+.progress-circle {
+  width: 200px;
+  height: 200px;
+}
+.progress-circle svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 10;
+  fill: none;
+}
+.progress-circle-track {
+  stroke: var(--color-track);
+}
+.progress-circle-indicator {
+  stroke: var(--color-progress);
+  stroke-dasharray: 280;
+  stroke-dashoffset: 170;
+}
+
+.progress-api {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  row-gap: 16px;
+}
+
+.progress-api-progressValue {
+  height: 24px;
+  width: 60px;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 50px;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.progress-api-progressValue::-webkit-outer-spin-button,
+.progress-api-progressValue::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.progress-api-progressValue:focus {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.progress-api-button {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 24px;
+  cursor: default;
+  border: none;
+  background-color: transparent;
+}
+
+.progress-api-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+  align-items: center;
+}
+
+.progress-api-button-wrapper p {
+  margin: 0;
+}
+
+.progress-api-button input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.progress-api-slider {
+  position: absolute;
+  cursor: pointer;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-track);
+  border-radius: 50px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.progress-api-slider:before {
+  position: absolute;
+  cursor: pointer;
+  content: "";
+  height: 80%;
+  width: 33%;
+  left: 10%;
+  bottom: 10%;
+  background-color: #ffffff;
+  border-radius: 50px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.progress-api-button input:checked + .progress-api-slider {
+  background-color: var(--color-progress);
+}
+
+.progress-api-button input:checked + .progress-api-slider:before {
+  -webkit-transform: translateX(150%);
+  -ms-transform: translateX(150%);
+  transform: translateX(150%);
+}
