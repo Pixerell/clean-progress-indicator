@@ -11,6 +11,11 @@
   text-align: center;
 }
 
+.progress-main h2 {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 .progress-circle {
   width: 200px;
   height: 200px;
