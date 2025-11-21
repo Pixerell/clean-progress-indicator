@@ -4,6 +4,13 @@
   --toggle-size: 33%;
 }
 
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .progress-circle {
   width: 200px;
   height: 200px;
@@ -19,7 +26,7 @@
 }
 .progress-circle-indicator {
   stroke: var(--color-progress);
-  transition: 0.4s;
+  transition: stroke-dashoffset 0.4s;
 }
 
 .progress-api {
@@ -122,5 +129,12 @@
   }
   100% {
     transform: rotate(270deg);
+  }
+}
+
+@media (orientation: landscape) {
+  .progress-wrapper {
+    flex-direction: row;
+    justify-content: center;
   }
 }
