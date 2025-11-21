@@ -1,42 +1,62 @@
-const progressInput = document.getElementById("progressValue");
-const progressAnimate = document.getElementById("progressAnimate");
-const progressHide = document.getElementById("progressHide");
-const indicator = document.getElementById("progressIndicator");
-const container = document.getElementById("progressContainer");
+function ProgressBlock({
+  container,
+  indicator,
+  progressInput,
+  progressAnimate,
+  progressHide,
+}) {
+  const ratio = Number(indicator.getAttribute("r")) || 45;
+  const circumference = 2 * Math.PI * ratio;
 
-const ratio = Number(indicator.getAttribute("r")) || 45;
-const circumference = 2 * Math.PI * ratio;
+  indicator.style.strokeDasharray = `${circumference} ${circumference}`;
 
-indicator.style.strokeDasharray = `${circumference} ${circumference}`;
+  function setValueToIndicator(value) {
+    const offset = circumference - (value / 100) * circumference;
+    indicator.style.strokeDashoffset = offset;
+    container.setAttribute("aria-valuenow", value);
+  }
 
-function setValueToIndicator(value) {
-  const offset = circumference - (value / 100) * circumference;
-  indicator.style.strokeDashoffset = offset;
-  container.setAttribute("aria-valuenow", value);
+  progressInput.addEventListener("input", () => {
+    let val = parseInt(progressInput.value, 10);
+    if (isNaN(val)) {
+      val = 0;
+    }
+    val = Math.max(0, Math.min(100, val));
+    progressInput.value = val;
+    setValueToIndicator(val);
+  });
+
+  progressAnimate.addEventListener("change", () => {
+    if (progressAnimate.checked) {
+      container.classList.add("progress-animated");
+    } else {
+      container.classList.remove("progress-animated");
+    }
+  });
+
+  progressHide.addEventListener("change", () => {
+    if (progressHide.checked) {
+      container.style.display = "none";
+    } else {
+      container.style.display = "block";
+    }
+  });
 }
 
-progressInput.addEventListener("input", () => {
-  let val = parseInt(progressInput.value, 10);
-  if (isNaN(val)) {
-    val = 0;
-  }
-  val = Math.max(0, Math.min(100, val));
-  progressInput.value = val;
-  setValueToIndicator(val);
-});
+// Я подумал что не прибитый к вёрстке, это значит не прибитый напрямую к id-шкам
+// И вынесенный в подобие компоненты как из фреймворков, чтобы можно было переиспользовать
+document.querySelectorAll(".progress-wrapper").forEach((wrapper) => {
+  const progressInput = wrapper.querySelector(".progress-api-progressValue");
+  const progressAnimate = wrapper.querySelector(".progress-api-animate");
+  const progressHide = wrapper.querySelector(".progress-api-hide");
+  const indicator = wrapper.querySelector(".progress-circle-indicator");
+  const container = wrapper.querySelector(".progress-circle");
 
-progressAnimate.addEventListener("change", () => {
-  if (progressAnimate.checked) {
-    container.style.animation = "rotateAnimation 2s linear infinite";
-  } else {
-    container.style.animation = "none";
-  }
-});
-
-progressHide.addEventListener("change", () => {
-  if (progressHide.checked) {
-    container.style.display = "none";
-  } else {
-    container.style.display = "block";
-  }
+  ProgressBlock({
+    container: container,
+    indicator: indicator,
+    progressInput: progressInput,
+    progressAnimate: progressAnimate,
+    progressHide: progressHide,
+  });
 });
