@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Progress Indicator</title>
+    <title>Progress</title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
     <main class="progress-wrapper">
       <div class="progress-main">
         <h1>Progress</h1>
-        <figure class="progress-circle">
+        <figure class="progress-circle" id="progressContainer">
           <svg viewBox="0 0 110 110">
             <circle class="progress-circle-track" cx="55" cy="55" r="45" />
-            <circle
+            <circle id="progressIndicator"
               class="progress-circle-indicator"
               cx="55"
               cy="55"
@@ -24,7 +24,7 @@
         </div>
       <aside class="progress-api">
         <div class="progress-api-button-wrapper">
-                <input class="progress-api-progressValue" type="number" min="0" max="100" id="progressValue">
+                <input class="progress-api-progressValue" type="number" min="0" max="100" value="100" id="progressValue">
                 <p>Value</p>
         </div>
             <div class="progress-api-button-wrapper">

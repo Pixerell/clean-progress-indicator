@@ -19,8 +19,7 @@
 }
 .progress-circle-indicator {
   stroke: var(--color-progress);
-  stroke-dasharray: 280;
-  stroke-dashoffset: 170;
+  transition: 0.4s;
 }
 
 .progress-api {
@@ -115,4 +114,13 @@
   -webkit-transform: translateX(150%);
   -ms-transform: translateX(150%);
   transform: translateX(150%);
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
 }
